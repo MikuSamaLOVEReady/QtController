@@ -22,6 +22,7 @@
 
 DataAnchor::DataAnchor(DataModel *model, DataAbstractItem *parent, int row, uint64_t id)
     : DataAbstractItem(model, parent, row),
+      _dim(2),
       _id(id),
       _x(0),
       _y(0),
@@ -78,6 +79,7 @@ QVariant DataAnchor::data(int column) const
     case ColumnDlyTx: return _antennaDlyTx;
     case ColumnMasterID: return _masterId;
     case ColumnLagDelay: return _lagDelayUs;
+    case ColumnDim : return _dim;
     }
 
     return QVariant();
@@ -97,6 +99,7 @@ bool DataAnchor::setData(int column, const QVariant &data)
     case ColumnDlyRx: setAntennaDlyRx(data.toDouble()); return true;
     case ColumnDlyTx: setAntennaDlyTx(data.toDouble()); return true;
     case ColumnLagDelay: setLagDelayUs(data.toInt()); return true;
+    case ColumnDim : setDim(data.toInt());return true;
     }
     return false;
 }
@@ -127,10 +130,18 @@ bool DataAnchor::isEditable(int column) const
     case ColumnSelected:
     case ColumnDlyRx:
     case ColumnDlyTx:
+    case ColumnDim:
         return true;
     }
 
     return false;
+}
+
+void DataAnchor::setDim(int dim)
+{
+    _dim = dim;
+    emit model() ->dataChanged(index(ColumnDim),index(ColumnDim));
+
 }
 
 void DataAnchor::setNumber(int x)

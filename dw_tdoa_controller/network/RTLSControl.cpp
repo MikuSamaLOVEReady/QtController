@@ -1040,6 +1040,7 @@ void RTLSControl::sendConfiguration(const QList<DataAnchor *> &anchors)
             stream.writeAttribute("x", QString::number(a->x()));
             stream.writeAttribute("y", QString::number(a->y()));
             stream.writeAttribute("z", QString::number(a->z()));
+            stream.writeAttribute("dim" , QString::number(a->anchorDim())); //TODO:获取
             stream.writeAttribute("master", master ? "1" : "0");
             stream.writeAttribute("master_addr", master ? QString::number(a->masterId(), 16) : "0"); //master_id in the XML config
             stream.writeAttribute("master_lag_delay", master ? QString::number(a->lagDelayUs(), 10) : "0");

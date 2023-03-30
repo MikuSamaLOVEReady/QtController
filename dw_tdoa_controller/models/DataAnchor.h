@@ -63,6 +63,7 @@ public:
         ColumnDlyTx,     ///< tx antenna delay value in ns (double)
         ColumnMasterID,  ///< Primary master ID (uint64)
         ColumnLagDelay,  ///< the lag this secondary master (if master) will send its CCPs after reception of primary's CCPs (double)
+        ColumnDim,      ///< Anchor type 1 = 1D anchor ; 2 = 2D anchor (int) >
         ColumnCount
     };
 
@@ -92,6 +93,11 @@ public:
 
     virtual bool isEditable(int column) const;
     /// @}
+
+    /**
+     * @param dim present the type of anchor.
+     */
+    void setDim(int dim);
 
     /**
      * @param x the new number value.
@@ -204,6 +210,11 @@ public:
     int number() const { return _number; }
 
     /**
+     * @return anchor's type
+     */
+    int anchorDim() const { return _dim; }
+
+    /**
      * save the current anchor's x, y, and z coordinates
      */
     void saveCoords() { _xs = _x; _ys = _y; _zs = _z;}
@@ -312,6 +323,7 @@ protected:
     void anchorMoved();
 
 private:
+    uint8_t _dim;          // =1 表示1维anchor  =2 表示2维anchor
     uint64_t _id;
     double _x, _y, _z;
     int _master;

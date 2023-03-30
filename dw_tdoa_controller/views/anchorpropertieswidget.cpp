@@ -59,6 +59,8 @@ void AnchorPropertiesWidget::onReady()
     _mapper->addMapping(ui->antennaDlyTx,  DataAnchor::ColumnDlyTx);
     _mapper->addMapping(ui->lagDelayus,  DataAnchor::ColumnLagDelay);
 
+    _mapper->addMapping(ui->dim_bx, DataAnchor::ColumnDim);
+
     QObject::connect(ui->selected_cb, SIGNAL(clicked()), _mapper, SLOT(submit())); // Bug with QDataWidgetMapper (QTBUG-1818)
 
     QObject::connect(ui->configure, SIGNAL(clicked()), this, SLOT(configureClicked()));
@@ -392,6 +394,7 @@ void AnchorPropertiesWidget::currentRowChanged(const QModelIndex & current, cons
         ui->xcoord_sb->setEnabled(true);
         ui->ycoord_sb->setEnabled(true);
         ui->zcoord_sb->setEnabled(true);
+        ui->dim_bx->setEnabled(true);
 
         ui->selected_cb->setEnabled(true);
         ui->antennaDlyRx->setEnabled(true);
@@ -413,6 +416,7 @@ void AnchorPropertiesWidget::currentRowChanged(const QModelIndex & current, cons
         ui->xcoord_sb->setEnabled(false);
         ui->ycoord_sb->setEnabled(false);
         ui->zcoord_sb->setEnabled(false);
+        ui->dim_bx->setEnabled(false);
 
         ui->selected_cb->setEnabled(false);
 
