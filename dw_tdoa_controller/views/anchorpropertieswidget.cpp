@@ -99,7 +99,7 @@ void AnchorPropertiesWidget::addPBClicked()
                                          tr("Master:"), _masterlist, 0, false, &ok);
     if (ok && !item.isEmpty())
     {
-        uint64_t id = item.toLongLong(&ok, 16);
+        uint64_t id = item.toULongLong(&ok, 16);
         if(id != anchIdNum) //if master can't add itself
         {
             _anch->addMasterAnchor(id);
